@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> 历史记录 </title>
+    <meta name="name" content="content" charset="utf-8">
+  </head>
+  <body background="file:///C:/Users/1/Desktop/brower/pyqt/%E8%AF%BB%E5%8F%96json/back.jpg" style=" background-repeat:no-repeat ;
+
+  background-size:100% 100%; 
+  
+  background-attachment: fixed;" >
+      <div id="fake button" style="	box-shadow:2px 2px 20px 2px white;opacity:0.8;margin-left:375px; position: absolute;width:98px; background-color: 	#003C9D; height:49px;  border-radius:15px;">
+        <a style="color:black;position: absolute; border-right: 0px; top:13px;left:17px;font-family:Microsoft Yahei;font: 13px/1.5 tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif" >选择文件</a>
+      <input type="file" value="选择文件" id="file" style=" opacity: 0; width:100px;  height:50px;">
+      </div>
+      <input type="button" id="show" style="		box-shadow:2px 2px 20px 2px white;	opacity:0.8;margin-left:925px;  position: absolute;  background-color: 	#003C9D;  width:100px;  height:50px;  border-radius:15px;" onclick="readText()" value="显示信息">
+      <div id="tt">
+      </div>
+  </body>
+</html>
+<script charset="utf-8">
+window.onload=function () {
+
+}
+  function readText() {
+      var file=document.getElementById("file").files[0];
+      var reader=new FileReader();
+      reader.readAsText(file);
+      reader.onload=function(data)
+      {
+        var tt=document.getElementById("tt");
+        
+        var obj = JSON.parse(this.result);
+        let length= Object.keys(obj).length;
+ 
+        var htmlstr = "<table style='position: absolute; top:25%;left:20%' width='60%'; border='1px'; cellspacing='0'; cellpadding='0'; align='center' >";
+        htmlstr +="<caption style='font-size:30px '></caption>"
+        htmlstr += "<tr>";
+        htmlstr += "<th align='center' style='background-color: #C0C0C0;'>"   + "</th>";
+        htmlstr += "<th align='center' style='background-color: #A9A9A9;'>" + "</th>";
+        htmlstr += "</tr>";
+        for(let key in obj){
+        htmlstr += "<tr>";
+        htmlstr += "<td style='background-color: #F5F5F5;'>" + key + "</td>";
+        htmlstr += "<td style='background-color: #DCDCDC;'><a href=" + obj[key]+">"+obj[key]+"</a> </td>";
+        htmlstr += "</tr>";
+        }
+
+        htmlstr += "</table>";
+        tt.innerHTML=htmlstr;
+      }
+    }
+   
+</script>
